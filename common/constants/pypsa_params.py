@@ -9,6 +9,8 @@ class GenUnitsPypsaParams:
     committable: str = 'committable'
     co2_emissions: str = 'co2_emissions'  # TODO: check that aligned on PyPSA generators attribute names
     efficiency: str = 'efficiency'
+    efficiency_store: str = 'efficiency_store'  # if store/discharge efficiency to be distinguished, e.g. for stocks
+    efficiency_dispatch: str = 'efficiency_dispatch'
     energy_capa: str = None
     inflow: str = 'inflow'
     marginal_cost: str = 'marginal_cost'

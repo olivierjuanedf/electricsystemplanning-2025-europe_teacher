@@ -91,7 +91,9 @@ def get_generators(country_trigram: str, fuel_sources: Dict[str, FuelSource], wi
          GEN_UNITS_PYPSA_PARAMS.min_power_pu: -1,
          GEN_UNITS_PYPSA_PARAMS.max_power_pu: 1,
          GEN_UNITS_PYPSA_PARAMS.max_hours: 2,
-         GEN_UNITS_PYPSA_PARAMS.soc_init: 1000
+         GEN_UNITS_PYPSA_PARAMS.soc_init: 1000,
+         GEN_UNITS_PYPSA_PARAMS.efficiency_store: 0.95,
+         GEN_UNITS_PYPSA_PARAMS.efficiency_dispatch: 0.95
         },
         # QUESTION: what is this - very necessary - last fictive asset?
         {

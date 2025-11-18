@@ -35,6 +35,8 @@ class GenerationUnitData:
     p_min_pu: Union[float, np.ndarray] = None
     p_max_pu: Union[float, np.ndarray] = None
     efficiency: float = None
+    efficiency_store: float = None
+    efficiency_dispatch: float = None
     marginal_cost: float = None
     committable: bool = False
     max_hours: float = None
