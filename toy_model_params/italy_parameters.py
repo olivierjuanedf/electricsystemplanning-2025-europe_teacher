@@ -1,6 +1,7 @@
 from typing import Dict, List, Union
 
 import pandas as pd
+import numpy as np
 
 from common.constants.pypsa_params import GEN_UNITS_PYPSA_PARAMS
 from common.fuel_sources import FuelSource, FuelNames, DummyFuelNames
@@ -29,6 +30,8 @@ def get_generators(country_trigram: str, fuel_sources: Dict[str, FuelSource], wi
     min_power_pu/max_power_pu=0/1, marginal_cost=0
     -> see field 'generator_params_default_vals' in file input/long_term_uc/pypsa_static_params.json
     """
+    # get number of time-slots based on length of CF data
+    n_ts = len(wind_on_shore_cf_data['value'].values)
     generators = [
         {
             GEN_UNITS_PYPSA_PARAMS.name: f'{country_trigram}_hard-coal',
@@ -85,7 +88,7 @@ def get_generators(country_trigram: str, fuel_sources: Dict[str, FuelSource], wi
             GEN_UNITS_PYPSA_PARAMS.nominal_power: 4466,
         },
         # this is a battery
-        {GEN_UNITS_PYPSA_PARAMS.name: f'Battery_{country_trigram}',
+        {GEN_UNITS_PYPSA_PARAMS.name: f'{country_trigram}_battery',
          GEN_UNITS_PYPSA_PARAMS.carrier: 'Flexibility', 
          GEN_UNITS_PYPSA_PARAMS.nominal_power: 4000,
          GEN_UNITS_PYPSA_PARAMS.min_power_pu: -1,
@@ -95,6 +98,14 @@ def get_generators(country_trigram: str, fuel_sources: Dict[str, FuelSource], wi
          GEN_UNITS_PYPSA_PARAMS.efficiency_store: 0.95,
          GEN_UNITS_PYPSA_PARAMS.efficiency_dispatch: 0.95
         },
+        # this is an hydro reservoir - with very fictive values!
+        {GEN_UNITS_PYPSA_PARAMS.name: f'{country_trigram}_hydro-reservoir',
+         GEN_UNITS_PYPSA_PARAMS.carrier: 'Hydro', 
+         GEN_UNITS_PYPSA_PARAMS.nominal_power: 10000,
+         GEN_UNITS_PYPSA_PARAMS.max_hours: 1000,
+         GEN_UNITS_PYPSA_PARAMS.soc_init: 1000000,
+         GEN_UNITS_PYPSA_PARAMS.inflow: np.ones(n_ts)
+        },        
         # QUESTION: what is this - very necessary - last fictive asset?
         {
             GEN_UNITS_PYPSA_PARAMS.name: f'{country_trigram}_failure',
