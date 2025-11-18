@@ -84,6 +84,15 @@ def get_generators(country_trigram: str, fuel_sources: Dict[str, FuelSource], wi
             GEN_UNITS_PYPSA_PARAMS.carrier: FuelNames.other_renewables,
             GEN_UNITS_PYPSA_PARAMS.nominal_power: 4466,
         },
+        # this is a battery
+        {GEN_UNITS_PYPSA_PARAMS.name: f'Battery_{country_trigram}',
+         GEN_UNITS_PYPSA_PARAMS.carrier: 'Flexibility', 
+         GEN_UNITS_PYPSA_PARAMS.nominal_power: 4000,
+         GEN_UNITS_PYPSA_PARAMS.min_power_pu: -1,
+         GEN_UNITS_PYPSA_PARAMS.max_power_pu: 1,
+         GEN_UNITS_PYPSA_PARAMS.max_hours: 2,
+         GEN_UNITS_PYPSA_PARAMS.soc_init: 1000
+        },
         # QUESTION: what is this - very necessary - last fictive asset?
         {
             GEN_UNITS_PYPSA_PARAMS.name: f'{country_trigram}_failure',

@@ -18,6 +18,7 @@ class GenUnitsPypsaParams:
     name: str = 'name'
     nominal_power: str = 'p_nom'
     power_capa: str = 'p_nom'
+    soc_init: float = 'state_of_charge_initial'
     set_power: str = 'p_set'
 
 
