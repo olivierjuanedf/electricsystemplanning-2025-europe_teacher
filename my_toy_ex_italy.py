@@ -210,7 +210,9 @@ fuel_sources = set_fuel_sources_from_json()
 generators = get_generators(country_trigram=country_trigram, fuel_sources=fuel_sources,
                             wind_on_shore_cf_data=wind_on_shore_cf_data[country],
                             wind_off_shore_cf_data=wind_off_shore_cf_data[country],
-                            solar_pv_cf_data=solar_pv_cf_data[country])
+                            solar_pv_cf_data=solar_pv_cf_data[country],
+                            hydro_reservoir_inflows_data=hydro_reservoir_inflows_data[country],
+                            open_loop_pump_sto_inflows_data=open_loop_pump_sto_inflows_data[country])
 # set generation units data from this list
 generation_units_data = set_gen_as_list_of_gen_units_data(generators=generators)
 # [N-countries] Add country (key), generation units data (values) to the gen_units_data argument
