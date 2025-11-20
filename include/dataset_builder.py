@@ -405,6 +405,7 @@ class PypsaModel:
         return self.prod_var_opt.multiply(self.network.snapshot_weightings.generators, axis=0).multiply(self.network.generators.carrier.map(self.network.carriers.co2_emissions), axis=1).sum().sum()
 
     def set_uc_summary_metrics(self, total_cost: float, failure_penalty: float = None):
+        logging.info('Set UC summary metrics')
         failure_prod_cols = [col for col in self.prod_var_opt.columns if col.endswith('_failure')]
         df_failure_opt = self.prod_var_opt[failure_prod_cols]
         per_country_ens = {key: float(val) for key, val in dict(df_failure_opt.sum()).items()}

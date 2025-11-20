@@ -247,12 +247,12 @@ def run(network_name: str = 'my little europe', solver_params: SolverParams = No
                                        n_countries=len(uc_run_params.selected_countries),
                                        uc_period_start=uc_run_params.uc_period_start, solver_params=solver_params)
 
-    save_data_and_fig_results(pypsa_model=pypsa_model, uc_run_params=uc_run_params, result_optim_status=result[1])
+    uc_summary_metrics = save_data_and_fig_results(pypsa_model=pypsa_model, uc_run_params=uc_run_params, result_optim_status=result[1])
 
     run_end = time.time()
 
     logging.info(f'{TITLE_LOG_SEP} THE END of ERAA-PyPSA long-term UC simulation! '
-                 f'(after {run_end - run_start:.2f}s) {TITLE_LOG_SEP}')
+                 f'(after {run_end - run_start:.2f}s) {TITLE_LOG_SEP}:\n{str(uc_summary_metrics)}')
     stop_logger()
 
 
